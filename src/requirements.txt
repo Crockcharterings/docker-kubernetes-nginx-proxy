@@ -1,0 +1,9 @@
+bunch==1.0.1
+Jinja2==2.8
+jsonpatch==1.13
+jsonpointer==1.10
+MarkupSafe==0.23
+pykube==0.9.0
+PyYAML==3.11
+requests==2.9.1
+six==1.10.0

@@ -67,6 +67,10 @@ http {
                             proxy_set_header Connection "upgrade";
                         {% endif %}
 
+                        {% if service.proxy_max_body_size %}
+                            client_max_body_size {{ service.proxy_max_body_size }};
+                        {% endif %}
+
                         proxy_pass http://{{ service.ip }}:{{ service.port }};
                     }
                 {% endif %}
@@ -98,6 +102,10 @@ http {
                         proxy_http_version 1.1;
                         proxy_set_header Upgrade $http_upgrade;
                         proxy_set_header Connection "upgrade";
+                    {% endif %}
+
+                    {% if service.proxy_max_body_size %}
+                        client_max_body_size {{ service.proxy_max_body_size }};
                     {% endif %}
 
                     proxy_pass http://{{ service.ip }}:{{ service.port }};

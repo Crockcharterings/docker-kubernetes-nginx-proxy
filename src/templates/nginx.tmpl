@@ -67,6 +67,14 @@ http {
                             proxy_set_header Connection "upgrade";
                         {% endif %}
 
+                        {% if service.proxy_allow %}
+                            allow {{ service.proxy_allow }};
+                        {% endif %}
+
+                        {% if service.proxy_deny %}
+                            deny {{ service.proxy_deny }};
+                        {% endif %}
+
                         {% if service.proxy_max_body_size %}
                             client_max_body_size {{ service.proxy_max_body_size }};
                         {% endif %}
@@ -102,6 +110,14 @@ http {
                         proxy_http_version 1.1;
                         proxy_set_header Upgrade $http_upgrade;
                         proxy_set_header Connection "upgrade";
+                    {% endif %}
+
+                    {% if service.proxy_allow %}
+                        allow {{ service.proxy_allow }};
+                    {% endif %}
+
+                    {% if service.proxy_deny %}
+                        deny {{ service.proxy_deny }};
                     {% endif %}
 
                     {% if service.proxy_max_body_size %}

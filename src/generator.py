@@ -33,7 +33,7 @@ if __name__ == "__main__":
   api = HTTPClient(config)
 
   services = Service.objects(api) \
-                  .filter(namespace='default', selector={'proxied': 'true'})
+                  .filter(selector={'proxied': 'true'})
 
   data = []
   for service in services:

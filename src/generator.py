@@ -32,8 +32,9 @@ if __name__ == "__main__":
   config = KubeConfig.from_service_account()
   api = HTTPClient(config)
 
-  services = Service.objects(api) \
-                  .filter(selector={'proxied': 'true'})
+  services = []
+  for namespace in os.getenv('PROXYED_NAMESPACES', 'default').split(','):
+      services += Service.objects(api).filter(namespace=namespace, selector={'proxied': 'true'})
 
   data = []
   for service in services:
@@ -43,4 +44,3 @@ if __name__ == "__main__":
 
   with open('/etc/nginx/nginx.conf', 'w') as file:
     file.write(result)
-
